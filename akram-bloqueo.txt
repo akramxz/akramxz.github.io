@@ -1,0 +1,27 @@
+# Lista negra de akram-dnshield - Laboratorio AKRAM-LAB
+# Autor: Akram El Mazzoudi Zarrouk
+# Dominios de publicidad, rastreadores y ejemplos de malware para la demo.
+# Admite el formato "dominio" y el formato hosts "0.0.0.0 dominio".
+
+# --- Publicidad y rastreadores ---
+doubleclick.net
+googlesyndication.com
+google-analytics.com
+googleadservices.com
+ads.yahoo.com
+adservice.google.com
+0.0.0.0 ad.doubleclick.net
+scorecardresearch.com
+quantserve.com
+taboola.com
+outbrain.com
+
+# --- Telemetria ---
+telemetry.microsoft.com
+app-measurement.com
+graph.facebook.com
+
+# --- Ejemplos de malware/phishing para la demostracion del laboratorio ---
+malware-ejemplo-akramlab.com
+phishing-banco-falso.net
+c2-servidor-maligno.org

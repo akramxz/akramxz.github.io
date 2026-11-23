@@ -1,0 +1,21 @@
+# akram-siem.service - SIEM del laboratorio AKRAM-LAB
+# Autor: Akram El Mazzoudi Zarrouk
+[Unit]
+Description=AKRAM-SIEM - centralizacion y correlacion de eventos (Akram El Mazzoudi)
+After=network-online.target akram-dnshield.service akram-ssh-guard.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 /opt/akram-siem/akram-siem.py --web 8443 --syslog 514
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=yes
+ProtectSystem=strict
+ReadWritePaths=/var/lib/akram-siem /var/lib/akram-dnshield
+ProtectHome=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

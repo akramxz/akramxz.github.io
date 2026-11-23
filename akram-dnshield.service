@@ -1,0 +1,24 @@
+# akram-dnshield.service - DNS Sinkhole del laboratorio AKRAM-LAB
+# Autor: Akram El Mazzoudi Zarrouk
+[Unit]
+Description=akram-dnshield - DNS Sinkhole (Akram El Mazzoudi)
+After=network-online.target systemd-resolved.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/local/sbin/akram-dnshield.py -i 10.66.0.10 --db /var/lib/akram-dnshield/dnshield.db
+Restart=on-failure
+RestartSec=3
+DynamicUser=no
+User=root
+StateDirectory=akram-dnshield
+NoNewPrivileges=yes
+ProtectSystem=strict
+ReadWritePaths=/var/lib/akram-dnshield
+ProtectHome=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

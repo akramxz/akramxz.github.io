@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AKRAM-SIEM · Akram El Mazzoudi</title>
+<!-- Panel de AKRAM-SIEM · Autor: Akram El Mazzoudi Zarrouk -->
+<style>
+:root{--bg:#07121f;--panel:#0d1c2e;--borde:#1b324b;--txt:#dce8f2;--tenue:#7d93a8;--acento:#4cc3e6;
+--crit:#d06cf0;--alta:#ff5f6d;--media:#f2b544;--baja:#4cc3e6;--info:#6b7f93;--ok:#3ecf8e;
+--mono:"JetBrains Mono",ui-monospace,Consolas,monospace;--sans:"Inter",system-ui,Segoe UI,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.45 var(--sans)}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 22px;border-bottom:1px solid var(--borde);background:#091729}
+.marca{display:flex;align-items:center;gap:12px}
+.logo{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#1b6f8f,#4cc3e6);display:grid;place-items:center;font:800 15px var(--mono);color:#04121e}
+.marca b{font:700 16px var(--sans);letter-spacing:.02em}
+.marca span{display:block;color:var(--tenue);font-size:12px}
+.estado{display:flex;gap:18px;align-items:center;color:var(--tenue);font:12px var(--mono)}
+.vivo{display:inline-flex;align-items:center;gap:7px;color:var(--ok)}
+.vivo i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(62,207,142,.7);animation:p 1.6s infinite}
+@keyframes p{70%{box-shadow:0 0 0 8px rgba(62,207,142,0)}100%{box-shadow:0 0 0 0 rgba(62,207,142,0)}}
+main{padding:18px 22px;display:grid;gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.kpi{background:var(--panel);border:1px solid var(--borde);border-radius:10px;padding:12px 14px}
+.kpi small{color:var(--tenue);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.kpi b{display:block;font:700 26px var(--mono);margin-top:4px;font-variant-numeric:tabular-nums}
+.k-crit b{color:var(--crit)}.k-alta b{color:var(--alta)}.k-media b{color:var(--media)}
+.fila{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.fila3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.caja{background:var(--panel);border:1px solid var(--borde);border-radius:10px;padding:14px 16px;min-width:0}
+.caja h2{margin:0 0 10px;font:600 12px var(--sans);text-transform:uppercase;letter-spacing:.09em;color:var(--tenue)}
+svg text{fill:var(--tenue);font:10px var(--mono)}
+.barra{display:grid;grid-template-columns:110px 1fr 46px;gap:8px;align-items:center;margin:6px 0;font-size:12.5px}
+.barra .p{height:8px;background:#132841;border-radius:4px;overflow:hidden}
+.barra .p i{display:block;height:100%;background:var(--acento);border-radius:4px}
+.barra .n{text-align:right;font:12px var(--mono);color:var(--tenue)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;color:var(--tenue);font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.06em;padding:6px 8px;border-bottom:1px solid var(--borde)}
+td{padding:6px 8px;border-bottom:1px solid #12263c;vertical-align:top}
+td.m{font-family:var(--mono);font-size:12px;color:var(--tenue);white-space:nowrap}
+.sev{display:inline-block;font:700 10.5px var(--mono);padding:2px 7px;border-radius:999px;letter-spacing:.04em}
+.CRITICA{background:rgba(208,108,240,.16);color:var(--crit)}.ALTA{background:rgba(255,95,109,.15);color:var(--alta)}
+.MEDIA{background:rgba(242,181,68,.15);color:var(--media)}.BAJA{background:rgba(76,195,230,.14);color:var(--baja)}
+.INFO{background:rgba(107,127,147,.16);color:var(--info)}
+.tabla{max-height:380px;overflow:auto}
+.mitre{font:11px var(--mono);color:var(--acento)}
+footer{padding:10px 22px 18px;color:var(--tenue);font-size:11.5px}
+@media (max-width:1000px){.kpis{grid-template-columns:repeat(3,1fr)}.fila,.fila3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="marca"><div class="logo">A</div><div><b>AKRAM-SIEM</b><span>Centro de monitorización del laboratorio · Akram El Mazzoudi</span></div></div>
+  <div class="estado"><span class="vivo"><i></i>en directo</span><span id="host">—</span><span id="hora">—</span></div>
+</header>
+<main>
+  <section class="kpis">
+    <div class="kpi"><small>Eventos</small><b id="kEv">0</b></div>
+    <div class="kpi"><small>Equipos · fuentes</small><b id="kEq">0</b></div>
+    <div class="kpi"><small>Alertas</small><b id="kAl">0</b></div>
+    <div class="kpi k-crit"><small>Críticas</small><b id="kC">0</b></div>
+    <div class="kpi k-alta"><small>Altas</small><b id="kA">0</b></div>
+    <div class="kpi k-media"><small>Medias</small><b id="kM">0</b></div>
+  </section>
+  <section class="fila">
+    <div class="caja"><h2>Actividad · últimos 60 minutos</h2><svg id="linea" viewBox="0 0 760 170" width="100%" height="170" role="img" aria-label="Eventos y alertas por minuto"></svg></div>
+    <div class="caja"><h2>Alertas por gravedad</h2><svg id="dona" viewBox="0 0 220 170" width="100%" height="170" role="img" aria-label="Alertas por gravedad"></svg></div>
+  </section>
+  <section class="fila3">
+    <div class="caja"><h2>Eventos por fuente</h2><div id="fuentes"></div></div>
+    <div class="caja"><h2>Equipos</h2><div id="equipos"></div></div>
+    <div class="caja"><h2>IPs con más alertas</h2><div id="ips"></div></div>
+  </section>
+  <section class="fila">
+    <div class="caja"><h2>Alertas recientes</h2><div class="tabla"><table><thead><tr><th>Hora</th><th>Gravedad</th><th>Regla</th><th>MITRE</th><th>Detalle</th></tr></thead><tbody id="alertas"></tbody></table></div></div>
+    <div class="caja"><h2>Técnicas MITRE ATT&amp;CK detectadas</h2><div id="mitre"></div></div>
+  </section>
+  <section class="caja"><h2>Últimos eventos normalizados</h2><div class="tabla"><table><thead><tr><th>Hora</th><th>Equipo</th><th>Fuente</th><th>Sev.</th><th>IP</th><th>Usuario</th><th>Mensaje</th></tr></thead><tbody id="eventos"></tbody></table></div></section>
+</main>
+<footer>AKRAM-SIEM · desarrollado por Akram El Mazzoudi Zarrouk · laboratorio AKRAM-LAB · se actualiza cada 5 s</footer>
+<script>
+const $=s=>document.querySelector(s);
+const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const COL={CRITICA:'#d06cf0',ALTA:'#ff5f6d',MEDIA:'#f2b544',BAJA:'#4cc3e6',INFO:'#6b7f93'};
+function barras(el,filas){const max=Math.max(1,...filas.map(f=>f[1]));
+  el.innerHTML=filas.map(([k,n])=>`<div class="barra"><span>${esc(k)}</span><span class="p"><i style="width:${n/max*100}%"></i></span><span class="n">${n}</span></div>`).join('')||'<p style="color:var(--tenue)">Sin datos</p>';}
+function linea(d){const W=760,H=170,L=34,B=22,T=8,n=d.length,max=Math.max(4,...d.map(x=>x[1]));
+  const x=i=>L+i*(W-L-8)/(n-1),y=v=>H-B-v*(H-B-T)/max;
+  let s='';for(let g=0;g<=4;g++){const v=Math.round(max*g/4),yy=y(v);s+=`<line x1="${L}" x2="${W-8}" y1="${yy}" y2="${yy}" stroke="#16304a"/><text x="${L-6}" y="${yy+3}" text-anchor="end">${v}</text>`}
+  d.forEach((p,i)=>{if(i%10===0||i===n-1)s+=`<text x="${x(i)}" y="${H-6}" text-anchor="middle">${p[0]}</text>`;
+    if(p[2])s+=`<rect x="${x(i)-3}" y="${y(p[2])}" width="6" height="${H-B-y(p[2])}" fill="#ff5f6d" opacity=".85"/>`});
+  const pts=d.map((p,i)=>`${x(i).toFixed(1)},${y(p[1]).toFixed(1)}`).join(' ');
+  s+=`<polygon points="${L},${H-B} ${pts} ${W-8},${H-B}" fill="rgba(76,195,230,.12)"/><polyline points="${pts}" fill="none" stroke="#4cc3e6" stroke-width="2"/>`;
+  s+=`<text x="${W-8}" y="12" text-anchor="end"><tspan fill="#4cc3e6">— eventos</tspan>  <tspan fill="#ff5f6d">▮ alertas</tspan></text>`;
+  $('#linea').innerHTML=s;}
+function dona(sev){const ks=['CRITICA','ALTA','MEDIA','BAJA'],tot=ks.reduce((a,k)=>a+(sev[k]||0),0)||1;let a=-Math.PI/2,s='';const cx=70,cy=85,r=58,r2=36;
+  ks.forEach(k=>{const v=sev[k]||0;if(!v)return;const b=a+v/tot*Math.PI*2,lg=b-a>Math.PI?1:0;
+    const p=(ang,rr)=>[cx+rr*Math.cos(ang),cy+rr*Math.sin(ang)];const[a1,a2]=p(a,r),[b1,b2]=p(b,r),[c1,c2]=p(b,r2),[d1,d2]=p(a,r2);
+    s+=`<path d="M${a1} ${a2}A${r} ${r} 0 ${lg} 1 ${b1} ${b2}L${c1} ${c2}A${r2} ${r2} 0 ${lg} 0 ${d1} ${d2}Z" fill="${COL[k]}"/>`;a=b});
+  s+=`<text x="${cx}" y="${cy+2}" text-anchor="middle" style="font:700 20px var(--mono);fill:#dce8f2">${tot}</text><text x="${cx}" y="${cy+16}" text-anchor="middle">alertas</text>`;
+  ks.forEach((k,i)=>s+=`<rect x="150" y="${44+i*22}" width="10" height="10" rx="2" fill="${COL[k]}"/><text x="166" y="${53+i*22}" style="fill:#dce8f2">${k} ${sev[k]||0}</text>`);
+  $('#dona').innerHTML=s;}
+async function cargar(){
+  try{const r=await (await fetch('/api/resumen',{cache:'no-store'})).json();pintar(r);}catch(e){$('#hora').textContent='sin conexión';}}
+function pintar(r){const t=r.totales;
+  $('#host').textContent=r.host;$('#hora').textContent=r.generado.replace('T',' ');
+  $('#kEv').textContent=t.eventos;$('#kEq').textContent=t.equipos+' · '+t.fuentes;$('#kAl').textContent=t.alertas;
+  $('#kC').textContent=r.severidad.CRITICA||0;$('#kA').textContent=r.severidad.ALTA||0;$('#kM').textContent=r.severidad.MEDIA||0;
+  linea(r.linea);dona(r.severidad);barras($('#fuentes'),r.fuentes);barras($('#equipos'),r.equipos);barras($('#ips'),r.ips);
+  $('#mitre').innerHTML=r.mitre.map(([m,reg,n])=>`<div class="barra" style="grid-template-columns:96px 1fr 30px"><span class="mitre">${esc(m)}</span><span>${esc(reg)}</span><span class="n">${n}</span></div>`).join('');
+  $('#alertas').innerHTML=r.alertas.map(a=>`<tr><td class="m">${a[0].slice(11)}</td><td><span class="sev ${a[1]}">${a[1]}</span></td><td>${esc(a[2])}</td><td class="mitre">${esc(a[3])}</td><td>${esc(a[7])}</td></tr>`).join('');
+  $('#eventos').innerHTML=r.eventos.map(e=>`<tr><td class="m">${e[0].slice(11)}</td><td>${esc(e[1])}</td><td>${esc(e[2])}</td><td><span class="sev ${e[3]}">${e[3]}</span></td><td class="m">${esc(e[4])}</td><td>${esc(e[5])}</td><td>${esc(e[6])}</td></tr>`).join('');}
+if(window.DATOS_DEMO){pintar(window.DATOS_DEMO)}else{cargar();setInterval(cargar,5000)}
+</script>
+</body>
+</html>

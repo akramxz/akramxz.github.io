@@ -1,0 +1,19 @@
+Nombre,Apellido,Usuario,Departamento,Puesto,Responsable
+Laura,Martinez,laura.martinez,Direccion,Directora general,
+Javier,Ortega,javier.ortega,Direccion,Director de operaciones,laura.martinez
+Sergio,Ruiz,sergio.ruiz,Sistemas,Responsable de sistemas,javier.ortega
+Nuria,Vidal,nuria.vidal,Sistemas,Administradora de sistemas,sergio.ruiz
+Omar,Benali,omar.benali,Sistemas,Tecnico de soporte,sergio.ruiz
+Ana,Garcia,ana.garcia,Desarrollo,Jefa de desarrollo,javier.ortega
+Pablo,Serrano,pablo.serrano,Desarrollo,Desarrollador backend,ana.garcia
+Marta,Lopez,marta.lopez,Desarrollo,Desarrolladora frontend,ana.garcia
+Yassin,Amrani,yassin.amrani,Desarrollo,Desarrollador junior,ana.garcia
+Carla,Fernandez,carla.fernandez,Ventas,Jefa de ventas,javier.ortega
+David,Moreno,david.moreno,Ventas,Comercial,carla.fernandez
+Lucia,Romero,lucia.romero,Ventas,Comercial,carla.fernandez
+Raul,Navarro,raul.navarro,Ventas,Comercial,carla.fernandez
+Elena,Torres,elena.torres,RRHH,Responsable de RRHH,javier.ortega
+Ines,Castillo,ines.castillo,RRHH,Tecnica de RRHH,elena.torres
+Hugo,Molina,hugo.molina,Contabilidad,Responsable financiero,javier.ortega
+Sara,Iglesias,sara.iglesias,Contabilidad,Contable,hugo.molina
+Adrian,Pena,adrian.pena,Contabilidad,Administrativo,hugo.molina

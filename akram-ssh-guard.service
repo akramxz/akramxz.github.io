@@ -1,0 +1,22 @@
+# Akram El Mazzoudi · SSH Brute Force Detector
+[Unit]
+Description=akram-ssh-guard · detector de fuerza bruta SSH con respuesta escalonada
+After=network-online.target ssh.service rsyslog.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -u /usr/local/sbin/akram-ssh-guard.py
+ExecStopPost=/usr/sbin/nft delete table inet akram_guard
+Restart=on-failure
+RestartSec=5
+# Endurecimiento del propio servicio
+NoNewPrivileges=yes
+ProtectHome=yes
+ProtectSystem=full
+ReadWritePaths=/var/log
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_DAC_READ_SEARCH
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target
